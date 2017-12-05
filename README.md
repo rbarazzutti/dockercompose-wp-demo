@@ -13,7 +13,7 @@ Requirements:
 
 Usage:
 
-    git clone http://www.github.com/rbarazzutti/dockercompose-wp-demo
+    git clone https://github.com/rbarazzutti/dockercompose-wp-demo.git
     cd dockercompose-wp-demo
     docker-compose up -d
 
