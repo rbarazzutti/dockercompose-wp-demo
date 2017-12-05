@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  dbbeta:
+    image: mysql:5.7
+    volumes:
+      - db_data_beta:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - betalink
+
+  wpbeta:
+    depends_on:
+      - dbalpha
+    image: wordpress
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: dbbeta:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    networks:
+      - betalink      
+
+  dbalpha:
+    image: mysql:5.7
+    volumes:
+      - db_data_alpha:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - alphalink
+
+  wpalpha:
+    depends_on:
+      - dbalpha
+    image: wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: dbalpha:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    networks:
+      - alphalink      
+
+  front:
+    volumes:
+      - ./front/conf:/etc/nginx/conf.d
+    depends_on:
+      - wpalpha
+      - wpbeta
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    networks: 
+      - alphalink
+      - betalink
+      
+
+volumes:
+  db_data_alpha:
+  db_data_beta:
+
+networks:
+  betalink:
+  alphalink:
