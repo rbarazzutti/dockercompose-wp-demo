@@ -1,7 +1,7 @@
 WordPress Instances in Docker Compose
 =====================================
 
-This repo just contains an example `docker-compose setup` that shows some features of Docker, s.t.
+This repo contains an example `docker-compose` setup that shows some features of Docker, s.t.
 * Networks
 * Volumes
 
@@ -25,4 +25,5 @@ Once `docker-compose` finished its job, you'd be able to access it with the foll
 * http://wp-alpha.fever.ch:8080
 * http://wp-beta.fever.ch:8080
 
-December, 5th 2017 RBarazzutti
+------------
+December, 5th 2017 - [Raphaël P. Barazzutti](https://r.barazzutti.net), Lecturer @ [School of Business and Engineering Vaud, HEIG-VD](https://heig-vd.ch/) for Distributed Architectures (ADist)
