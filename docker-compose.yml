@@ -16,7 +16,7 @@ services:
 
   wpbeta:
     depends_on:
-      - dbalpha
+      - dbbeta
     image: wordpress
     restart: always
     ports:
